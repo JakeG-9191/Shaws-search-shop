@@ -1,0 +1,29 @@
+{
+  "name": "shaws-search-shop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "moment": "^2.26.0",
+    "node-spotify-api": "^1.1.1",
+    "require": "^2.4.20"
+  },
+  "devDependencies": {},
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JakeG-9191/Shaws-search-shop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JakeG-9191/Shaws-search-shop/issues"
+  },
+  "homepage": "https://github.com/JakeG-9191/Shaws-search-shop#readme"
+}

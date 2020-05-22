@@ -1,17 +1,9 @@
-// Require dotenv to be installed
-require('dotenv').config();
-// Grab necessary keys for Spotify from directory
-var keys = require('./keys.js');
-// Axios requirement
-var axios = require('axios');
-// Spotify Requirement
-var Spotify = require('node-spotify-api');
+import axios from 'axios';
 
 const userInput = 'Clutch';
 
-console.log('this is on');
-
 const concertRequest = () => {
+  let userInput = 'clutch';
   axios
     .get(
       'https://rest.bandsintown.com/artists/' +
@@ -32,6 +24,8 @@ const concertRequest = () => {
       console.log(error);
     });
 };
+
+concertRequest();
 
 const spotify = new Spotify(keys.spotify);
 
