@@ -1,52 +1,33 @@
-import axios from 'axios';
+const express = require('express');
+const logger = require('morgan');
+const axios = require('axios');
+const cheerio = require('cheerio');
+const mongoose = require('mongoose');
+const exphbs = require('express-handlebars');
+const path = require('path');
 
-const userInput = 'Clutch';
+const db = require('./models');
+const app = express();
 
-const concertRequest = () => {
-  let userInput = 'clutch';
-  axios
-    .get(
-      'https://rest.bandsintown.com/artists/' +
-        userInput +
-        '/events?app_id=codingbootcamp'
-    )
-    .then(function (response) {
-      for (var i = 0; i < 5; i++) {
-        var time = moment(response.data[i].datetime).format('L');
-        console.log('\n------------Next Event----------------');
-        console.log('Venue Name: ' + response.data[i].venue.name);
-        console.log('Venue Country: ' + response.data[i].venue.country);
-        console.log('Venue City: ' + response.data[i].venue.city);
-        console.log(time);
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-};
+const PORT = process.env.PORT || 8080;
 
-concertRequest();
+app.use(logger('dev'));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static('public'));
 
-const spotify = new Spotify(keys.spotify);
+require('./routes/apiRoutes')(app);
+require('./routes/html')(app);
 
-const spotifyRequest = () => {
-  spotify
-    .search({
-      type: 'track',
-      query: userInput || 'The Sign Ace of Base',
-      limit: 1,
-    })
-    .then(function (response) {
-      console.log('\n-------Artist Name----------');
-      console.log(response.tracks.items[0].artists[0].name);
-      console.log('-------Song Name----------');
-      console.log(response.tracks.items[0].name);
-      console.log('--------Preview URL---------');
-      console.log(response.tracks.items[0].preview_url);
-      console.log('--------Album Name---------');
-      console.log(response.tracks.items[0].album.name);
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
-};
+const MONGODB_URI =
+  process.env.MONGODB_URI || 'mongodb://localhost/Shaws-Search-App';
+mongoose.connect(MONGODB_URI);
+
+// mongoose.connect("mongodb://localhost/WashingtonPost", { useNewUrlParser: true });
+// mongoose.connect("mongodb://localhost/WashingtonPost", function () {
+//     mongoose.connection.db.dropDatabase()
+// });
+
+app.listen(PORT, function () {
+  console.log('App running on port ' + PORT + '!');
+});
