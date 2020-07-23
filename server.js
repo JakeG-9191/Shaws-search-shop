@@ -20,7 +20,7 @@ require('./routes/apiRoutes')(app);
 require('./routes/html')(app);
 
 const MONGODB_URI =
-  process.env.MONGODB_URI || 'mongodb://localhost/Shaws-Search-App';
+  process.env.MONGODB_URI || 'mongodb://localhost/ShawsSearchApp';
 mongoose.connect(MONGODB_URI);
 
 // mongoose.connect("mongodb://localhost/WashingtonPost", { useNewUrlParser: true });
