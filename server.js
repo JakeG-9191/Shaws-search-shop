@@ -1,7 +1,8 @@
 import cheerio from 'cheerio';
 import puppeteer from 'puppeteer';
+import axios from 'axios';
 
-// const url = 'https://www.reddit.com/r/harrypotter/';
+// const url = 'https://coronavirus.jhu.edu/';
 
 // puppeteer
 //   .launch()
@@ -14,7 +15,7 @@ import puppeteer from 'puppeteer';
 //   .then((html) => {
 //     const $ = cheerio.load(html);
 //     const newsHeadlines = [];
-//     $('a[href*="/r/harrypotter/comments"] > div > h3').each(function () {
+//     $('article > ul > li > figure').each(function () {
 //       newsHeadlines.push({
 //         title: $(this).text(),
 //       });
@@ -24,25 +25,15 @@ import puppeteer from 'puppeteer';
 //   })
 //   .catch(console.error);
 
-const url = 'https://coronavirus.jhu.edu/';
+const my_tag = 'devjam';
 
-puppeteer
-  .launch()
-  .then((browser) => browser.newPage())
-  .then((page) => {
-    return page.goto(url).then(function () {
-      return page.content();
-    });
-  })
-  .then((html) => {
-    const $ = cheerio.load(html);
-    const newsHeadlines = [];
-    $('article > ul > li > figure').each(function () {
-      newsHeadlines.push({
-        title: $(this).text(),
-      });
-    });
+const url = `https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&dmaId=324&apikey=Tr04RiGjZx5e9SG89GdLfv6yAoHYvaZG`;
 
-    console.log(newsHeadlines);
+axios(url)
+  .then((response) => {
+    const res_length = Object.keys(response.data._embedded.events);
+    const html = response.data._embedded.events[19].name;
+    console.log(res_length);
+    console.log(`this is the last event, ${html}`);
   })
   .catch(console.error);
