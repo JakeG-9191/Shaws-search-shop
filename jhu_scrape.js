@@ -7,7 +7,8 @@ import fs from 'fs';
 const error = chalk.bold.red;
 const success = chalk.keyword('green');
 
-(async () => {
+export async function JHU() {
+  console.log(success('JHU Scrape Starting'));
   try {
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
@@ -33,7 +34,7 @@ const success = chalk.keyword('green');
     // console.log(newFigures);
     fs.writeFile('jhucovid.json', JSON.stringify(newFigures), function (err) {
       if (err) throw err;
-      console.log('Saved New File Successfully');
+      console.log('Saved New File Successfully - JHU');
     });
     console.log(success('Browser Closed'));
   } catch (err) {
@@ -41,4 +42,10 @@ const success = chalk.keyword('green');
     await browser.close();
     console.log(error('Browser Closed With Error!'));
   }
-})();
+}
+
+export function launchJH() {
+  const delay = 10000;
+  setTimeout(JHU, delay);
+  return console.log(`launched JHU Scrape at ${delay / 1000}s delay`);
+}

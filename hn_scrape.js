@@ -7,7 +7,8 @@ import fs from 'fs';
 const error = chalk.bold.red;
 const success = chalk.keyword('green');
 
-(async () => {
+export async function HN() {
+  console.log(success('HackerNews Scrape Starting'));
   try {
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
@@ -31,7 +32,7 @@ const success = chalk.keyword('green');
     // console.log(news);
     fs.writeFile('hackernews.json', JSON.stringify(news), function (err) {
       if (err) throw err;
-      console.log('Saved New File Successfully');
+      console.log('Saved New File Successfully - HackerNews');
     });
     console.log(success('browser closed'));
   } catch (err) {
@@ -39,7 +40,13 @@ const success = chalk.keyword('green');
     await browser.close();
     console.log(error('browser closed'));
   }
-})();
+}
+
+export function launchHN() {
+  const delay = 25000;
+  setTimeout(HN, delay);
+  return console.log(`launched HN Scrape at ${delay / 1000}s delay`);
+}
 
 // const url =
 //   'https://www.ticketmaster.com/search?radius=75&sort=date%2Casc&unit=miles&tab=events&daterange=all';
