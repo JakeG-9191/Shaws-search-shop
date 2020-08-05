@@ -43,9 +43,8 @@ export async function HN() {
 }
 
 export function launchHN() {
-  const delay = 25000;
-  setTimeout(HN, delay);
-  return console.log(`launched HN Scrape at ${delay / 1000}s delay`);
+  HN();
+  return console.log(`launched HN Scrape`);
 }
 
 // const url =

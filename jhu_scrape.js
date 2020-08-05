@@ -45,7 +45,6 @@ export async function JHU() {
 }
 
 export function launchJH() {
-  const delay = 10000;
-  setTimeout(JHU, delay);
-  return console.log(`launched JHU Scrape at ${delay / 1000}s delay`);
+  JHU();
+  return console.log(`launched JHU Scrape`);
 }
