@@ -4,6 +4,9 @@ import chalk from 'chalk';
 
 import fs from 'fs';
 
+const error = chalk.bold.red;
+const success = chalk.keyword('green');
+
 // const url = 'https://coronavirus.jhu.edu/';
 
 // puppeteer
@@ -27,44 +30,72 @@ import fs from 'fs';
 //   })
 //   .catch(console.error);
 
-const error = chalk.bold.red;
-const success = chalk.keyword('green');
-
 (async () => {
   try {
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
-    await page.goto(`https://news.ycombinator.com/`);
-    await page.waitForSelector(`a.storylink`);
+    await page.goto(`https://coronavirus.jhu.edu/`);
+    await page.waitForSelector(`article.FeaturedStats_base__G1hZh`);
 
-    const news = await page.evaluate(() => {
-      var titleNodeList = document.querySelectorAll(`a.storylink`);
-      var ageList = document.querySelectorAll(`span.age`);
-      var scoreList = document.querySelectorAll(`span.score`);
-      var titleLinkArray = [];
-      for (let i = 0; i < titleNodeList.length; i++) {
-        titleLinkArray[i] = {
-          title: titleNodeList[i].innerText.trim(),
-          link: titleNodeList[i].getAttribute(`href`),
-          age: ageList[i].innerText.trim(),
-          score: scoreList[i].innerText.trim(),
+    const newFigures = await page.evaluate(() => {
+      let allnewFigures = document.querySelectorAll(
+        `ul.FeaturedStats_stats__2keLP`
+      );
+      let updatedTitle = document.querySelectorAll(`figure > figcaption`);
+      let updatedNumbers = document.querySelectorAll(`figure > p`);
+      let figureArray = [];
+      for (let i = 0; i < allnewFigures.length; i++) {
+        figureArray[i] = {
+          info: allnewFigures[i].innerText.trim(),
+          title: updatedTitle[i].innerHTML.trim(),
+          nums: updatedNumbers[i].innerHTML.trim(),
         };
       }
-      return titleLinkArray;
+      return figureArray;
     });
     await browser.close();
-    console.log(news);
-    // fs.writeFile('hackernews.json', JSON.stringify(news), function (err) {
-    //   if (err) throw err;
-    //   console.log('Saved');
-    // });
-    console.log(success('browser closed'));
+    console.log(newFigures);
+    console.log(success('Browser Closed'));
   } catch (err) {
     console.log(error(err));
     await browser.close();
-    console.log(error('browser closed'));
+    console.log(error('Browser Closed With Error!'));
   }
 })();
+
+// (async () => {
+//   try {
+//     const browser = await puppeteer.launch({ headless: false });
+//     const page = await browser.newPage();
+//     await page.goto(`https://news.ycombinator.com/`);
+//     await page.waitForSelector(`a.storylink`);
+
+//     const news = await page.evaluate(() => {
+//       let titleNodeList = document.querySelectorAll(`a.storylink`);
+//       let scoreList = document.querySelectorAll(`td.subtext`);
+//       let titleLinkArray = [];
+//       for (let i = 0; i < titleNodeList.length; i++) {
+//         titleLinkArray[i] = {
+//           title: titleNodeList[i].innerText.trim(),
+//           link: titleNodeList[i].getAttribute(`href`),
+//           score: scoreList[i].innerText.trim(),
+//         };
+//       }
+//       return titleLinkArray;
+//     });
+//     await browser.close();
+//     // console.log(news);
+//     fs.writeFile('hackernews.json', JSON.stringify(news), function (err) {
+//       if (err) throw err;
+//       console.log('Saved');
+//     });
+//     console.log(success('browser closed'));
+//   } catch (err) {
+//     console.log(error(err));
+//     await browser.close();
+//     console.log(error('browser closed'));
+//   }
+// })();
 
 // const url =
 //   'https://www.ticketmaster.com/search?radius=75&sort=date%2Casc&unit=miles&tab=events&daterange=all';
