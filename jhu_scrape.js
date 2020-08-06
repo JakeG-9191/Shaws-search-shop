@@ -32,7 +32,7 @@ export async function JHU() {
     });
     await browser.close();
     // console.log(newFigures);
-    fs.appendFile('jhucovid.json', JSON.stringify(newFigures), function (err) {
+    fs.writeFile('jhucovid.json', JSON.stringify(newFigures), function (err) {
       if (err) throw err;
       console.log('Saved New File Successfully - JHU');
     });

@@ -17,11 +17,11 @@ export async function BBC() {
 
     const updatedBBC = await page.evaluate(() => {
       let allnewFigures = document.querySelectorAll(
-        `div.nw-c-most-read__items`
+        `div.nw-c-most-read__items > ol > li.gel-layout__item`
       );
       let updatedTitle = document.querySelectorAll(`span.nw-c-most-read__rank`);
       let updatedNumbers = document.querySelectorAll(
-        `a.gs-c-promo-heading > span.gs-c-promo-heading__title`
+        `a.gs-o-faux-block-link__overlay-link > span.gs-c-promo-heading__title`
       );
       let figureArray = [];
       for (let i = 0; i < allnewFigures.length; i++) {
@@ -33,11 +33,11 @@ export async function BBC() {
       return figureArray;
     });
     await browser.close();
-    console.log(updatedBBC);
-    // fs.writeFile('reddit.json', JSON.stringify(newFigures), function (err) {
-    //   if (err) throw err;
-    //   console.log('Saved New File Successfully - Reddit');
-    // });
+    // console.log(updatedBBC);
+    fs.writeFile('bbc.json', JSON.stringify(updatedBBC), function (err) {
+      if (err) throw err;
+      console.log('Saved New File Successfully - BBC');
+    });
     console.log(success('Browser Closed'));
   } catch (err) {
     console.log(error(err));
