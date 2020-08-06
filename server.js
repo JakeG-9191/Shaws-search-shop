@@ -12,7 +12,7 @@ const __dirname = path.resolve();
 
 app.get('/scrape', function (req, res) {
   launchJH();
-  res.send('Started Scrape');
+  res.send({ some: 'json' });
 });
 
 app.get('/', function (req, res) {
