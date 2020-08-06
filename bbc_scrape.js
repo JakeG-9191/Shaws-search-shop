@@ -13,19 +13,21 @@ export async function BBC() {
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     await page.goto(`https://www.bbc.com/news`);
-    await page.waitForSelector(`ol.gs-u-display-none@xs`);
+    await page.waitForSelector(`ol.gel-layout__item`);
 
     const updatedBBC = await page.evaluate(() => {
-      let allnewFigures = document.querySelectorAll(`gel-layout__item`);
+      let allnewFigures = document.querySelectorAll(
+        `div.nw-c-most-read__items`
+      );
       let updatedTitle = document.querySelectorAll(`span.nw-c-most-read__rank`);
       let updatedNumbers = document.querySelectorAll(
-        `span.gs-c-promo-heading__title`
+        `a.gs-c-promo-heading > span.gs-c-promo-heading__title`
       );
       let figureArray = [];
       for (let i = 0; i < allnewFigures.length; i++) {
         figureArray[i] = {
-          title: updatedTitle[i].innerHTML.trim(),
-          nums: updatedNumbers[i].innerHTML.trim(),
+          title: updatedTitle[i].innerText.trim(),
+          nums: updatedNumbers[i].innerText.trim(),
         };
       }
       return figureArray;
