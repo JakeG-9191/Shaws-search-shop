@@ -22,4 +22,4 @@ launchDR();
 
 setTimeout(() => {
   return process.exit();
-}, 30000);
+}, 25000);
