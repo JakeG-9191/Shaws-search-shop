@@ -46,29 +46,3 @@ export function launchHN() {
   HN();
   return console.log(`launched HN Scrape`);
 }
-
-// const url =
-//   'https://www.ticketmaster.com/search?radius=75&sort=date%2Casc&unit=miles&tab=events&daterange=all';
-
-// puppeteer
-//   .launch({ headless: false })
-//   .then((browser) => browser.newPage())
-//   .then((page) => {
-//     return page.goto(url).then(function () {
-//       return page.content();
-//     });
-//   })
-//   .then((html) => {
-//     const $ = cheerio.load(html);
-//     const newsHeadlines = [];
-//     $(
-//       'div.visibility-container > div.event-listing > div.accordion-wrapper > div.event-listing__item > div.inactive > div.accordion_panel > div.minHeight > section.event-list-panel-item--lineUp > div.eVdrog > div.event__list__link > div.hTRmfd > a.event-tile__link'
-//     ).each(function () {
-//       newsHeadlines.push({
-//         title: $(this).text(),
-//       });
-//     });
-
-//     return console.log(newsHeadlines);
-//   })
-//   .catch(console.error);

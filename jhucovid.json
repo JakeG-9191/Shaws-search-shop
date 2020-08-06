@@ -1,1 +1,16 @@
-[{"title":"Global Confirmed","nums":"18,609,287"},{"title":"Global Deaths","nums":"702,164"},{"title":"U.S. Confirmed","nums":"4,789,383"},{"title":"U.S. Deaths","nums":"157,266"}]
+[
+  { "title": "Global Confirmed", "nums": "18,609,287" },
+  { "title": "Global Deaths", "nums": "702,164" },
+  { "title": "U.S. Confirmed", "nums": "4,789,383" },
+  { "title": "U.S. Deaths", "nums": "157,266" },
+
+  { "title": "Global Confirmed", "nums": "18,837,392" },
+  { "title": "Global Deaths", "nums": "708,301" },
+  { "title": "U.S. Confirmed", "nums": "4,824,175" },
+  { "title": "U.S. Deaths", "nums": "158,268" },
+
+  { "title": "Global Confirmed", "nums": "18,851,834" },
+  { "title": "Global Deaths", "nums": "708,540" },
+  { "title": "U.S. Confirmed", "nums": "4,826,861" },
+  { "title": "U.S. Deaths", "nums": "158,321" }
+]

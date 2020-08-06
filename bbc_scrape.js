@@ -7,20 +7,20 @@ import fs from 'fs';
 const error = chalk.bold.red;
 const success = chalk.keyword('green');
 
-export async function JHU() {
-  console.log(success('JHU Scrape Starting'));
+export async function BBC() {
+  console.log(success('BBC Scrape Starting'));
   try {
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
-    await page.goto(`https://coronavirus.jhu.edu/`);
-    await page.waitForSelector(`article.FeaturedStats_base__G1hZh`);
+    await page.goto(`https://www.bbc.com/news`);
+    await page.waitForSelector(`ol.gs-u-display-none@xs`);
 
-    const newFigures = await page.evaluate(() => {
-      let allnewFigures = document.querySelectorAll(
-        `li.FeaturedStats_stat__1MPv_`
+    const updatedBBC = await page.evaluate(() => {
+      let allnewFigures = document.querySelectorAll(`gel-layout__item`);
+      let updatedTitle = document.querySelectorAll(`span.nw-c-most-read__rank`);
+      let updatedNumbers = document.querySelectorAll(
+        `span.gs-c-promo-heading__title`
       );
-      let updatedTitle = document.querySelectorAll(`figure > figcaption`);
-      let updatedNumbers = document.querySelectorAll(`figure > p`);
       let figureArray = [];
       for (let i = 0; i < allnewFigures.length; i++) {
         figureArray[i] = {
@@ -31,11 +31,11 @@ export async function JHU() {
       return figureArray;
     });
     await browser.close();
-    // console.log(newFigures);
-    fs.appendFile('jhucovid.json', JSON.stringify(newFigures), function (err) {
-      if (err) throw err;
-      console.log('Saved New File Successfully - JHU');
-    });
+    console.log(updatedBBC);
+    // fs.writeFile('reddit.json', JSON.stringify(newFigures), function (err) {
+    //   if (err) throw err;
+    //   console.log('Saved New File Successfully - Reddit');
+    // });
     console.log(success('Browser Closed'));
   } catch (err) {
     console.log(error(err));
@@ -44,7 +44,7 @@ export async function JHU() {
   }
 }
 
-export function launchJH() {
-  JHU();
-  return console.log(`launched JHU Scrape`);
+export function launchBBC() {
+  BBC();
+  return console.log(`launched BBC Scrape`);
 }
