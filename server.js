@@ -1,25 +1,27 @@
 import express from 'express';
+import mongoose from 'mongoose';
+import path from 'path';
 import { launchHN } from './hn_scrape.js';
 import { launchJH } from './jhu_scrape.js';
 import { launchBBC } from './bbc_scrape.js';
 import { launchDR } from './dr_scrape.js';
 
 const app = express();
-const port = 8000;
+const PORT = process.env.PORT || 8080;
+const __dirname = path.resolve();
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+app.get('/scrape', function (req, res) {
+  launchJH();
+  res.send('Started Scrape');
 });
 
-app.listen(port, () => {
-  console.log(`Application now listening at http://localhost:${port}`);
+app.get('/', function (req, res) {
+  res.send('Hello World');
 });
 
-launchHN();
-launchJH();
-launchBBC();
-launchDR();
+app.use('/', express.static(path.join(__dirname, 'public')));
+app.use('/json', express.static(path.join(__dirname, 'json')));
 
-setTimeout(() => {
-  return process.exit();
-}, 25000);
+app.listen(PORT, () => {
+  console.log(`Application now listening at http://localhost:${PORT}`);
+});

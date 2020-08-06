@@ -28,13 +28,14 @@ export async function BBC() {
         figureArray[i] = {
           title: updatedTitle[i].innerText.trim(),
           nums: updatedNumbers[i].innerText.trim(),
+          // link: updatedTitle[i].getAttribute(`href`),
         };
       }
       return figureArray;
     });
     await browser.close();
     // console.log(updatedBBC);
-    fs.writeFile('bbc.json', JSON.stringify(updatedBBC), function (err) {
+    fs.writeFile('json/bbc.json', JSON.stringify(updatedBBC), function (err) {
       if (err) throw err;
       console.log('Saved New File Successfully - BBC');
     });
@@ -47,6 +48,7 @@ export async function BBC() {
 }
 
 export function launchBBC() {
+  console.log(`Date and time is: ${Date.now().toString()}`);
   BBC();
   return console.log(`launched BBC Scrape`);
 }

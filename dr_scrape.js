@@ -30,7 +30,7 @@ export async function downRiver() {
     });
     await browser.close();
     // console.log(dRScrape);
-    fs.writeFile('dRstaff.json', JSON.stringify(dRScrape), function (err) {
+    fs.writeFile('json/dRstaff.json', JSON.stringify(dRScrape), function (err) {
       if (err) throw err;
       console.log('Saved New File Successfully - DR Staff');
     });

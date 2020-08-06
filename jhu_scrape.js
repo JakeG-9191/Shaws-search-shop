@@ -32,7 +32,9 @@ export async function JHU() {
     });
     await browser.close();
     // console.log(newFigures);
-    fs.writeFile('jhucovid.json', JSON.stringify(newFigures), function (err) {
+    fs.writeFile('json/jhucovid.json', JSON.stringify(newFigures), function (
+      err
+    ) {
       if (err) throw err;
       console.log('Saved New File Successfully - JHU');
     });
@@ -45,6 +47,9 @@ export async function JHU() {
 }
 
 export function launchJH() {
+  let date = Date();
+  let format = date.toString();
+  console.log(`Date and time is: ${format}`);
   JHU();
   return console.log(`launched JHU Scrape`);
 }
