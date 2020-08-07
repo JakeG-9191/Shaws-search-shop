@@ -71,7 +71,7 @@ export async function downRiverDouble() {
     });
     await browser.close();
     // console.log(dRDoubleScrape);
-    fs.writeFile('dRboats.json', JSON.stringify(dRDoubleScrape), function (
+    fs.writeFile('json/dRboats.json', JSON.stringify(dRDoubleScrape), function (
       err
     ) {
       if (err) throw err;

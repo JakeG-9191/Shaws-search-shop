@@ -13,7 +13,10 @@ const __dirname = path.resolve();
 
 app.get('/scrape', function (req, res) {
   launchJH();
-  res.send({ some: 'json' });
+  launchHN();
+  launchBBC();
+  launchDR();
+  res.send('Scrape Successful');
 });
 
 app.get('/hello', function (req, res) {
