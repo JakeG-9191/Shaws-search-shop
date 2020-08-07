@@ -5,6 +5,7 @@ import { launchHN } from './hn_scrape.js';
 import { launchJH } from './jhu_scrape.js';
 import { launchBBC } from './bbc_scrape.js';
 import { launchDR } from './dr_scrape.js';
+import cors from 'cors';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -15,10 +16,11 @@ app.get('/scrape', function (req, res) {
   res.send({ some: 'json' });
 });
 
-app.get('/', function (req, res) {
+app.get('/hello', function (req, res) {
   res.send('Hello World');
 });
 
+app.use(cors());
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/json', express.static(path.join(__dirname, 'json')));
 

@@ -7,6 +7,7 @@
     "axios": "^0.19.2",
     "chalk": "^4.1.0",
     "cheerio": "^1.0.0-rc.3",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.9.27",
     "path": "^0.12.7",
@@ -16,7 +17,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node server.js && cd client npm start"
   },
   "repository": {
     "type": "git",
