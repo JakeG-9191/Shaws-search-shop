@@ -32,7 +32,13 @@ app.get('/api/members', (req, res) => {
   console.log('Scrape is initiated');
   launchJH();
   launchHN();
+  res.send({
+    msg: 'Scrape has finished',
+    location: `${req.protocol}://${req.get('host')}${req.originalUrl}`,
+  });
 });
+
+app.get('/hey', (req, res) => res.send('ho!'));
 
 // app.get('/api/members/:id', (req, res) => {
 //   // res.send(req.params.id);

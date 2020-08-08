@@ -37,12 +37,15 @@ class App extends Component {
   }
 
   callAPI3() {
-    // fetch('http://localhost:8080/api/members');
-    axios({ method: 'GET', url: 'http://localhost:8080/api/members' }).then(
-      (res) => {
-        console.log(res);
-      }
-    );
+    // await axios({
+    //   method: 'GET',
+    //   url: `http://localhost:8080/api/members`,
+    // })
+    //   .then((res) => {
+    //     console.log(res.msg);
+    //   })
+    //   .catch((err) => console.log(err));
+    axios.get('/api/members').then((res) => console.log(res));
   }
 
   componentDidMount() {
