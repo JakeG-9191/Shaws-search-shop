@@ -35,6 +35,10 @@ class App extends Component {
     });
   }
 
+  callAPI3() {
+    fetch('http://localhost:8080/api/members');
+  }
+
   componentDidMount() {
     this.callAPI();
     this.callAPI2();
@@ -48,15 +52,20 @@ class App extends Component {
             <img src={logo} className='App-logo' alt='logo' />
             <h1 className='App-title'>Welcome to the Thunder Dome</h1>
           </header>
+          <button onClick={this.callAPI3}>Begin Scrape</button>
           <div className='App-intro'>
             {this.state.info.map((info) => (
-              <p>{info}</p>
+              <ul>
+                <li>{info}</li>
+              </ul>
             ))}
           </div>
           <hr />
           <div className='App-intro'>
             {this.state.info2.map((info) => (
-              <p>{info}</p>
+              <ul>
+                <li>{info}</li>
+              </ul>
             ))}
           </div>
         </div>

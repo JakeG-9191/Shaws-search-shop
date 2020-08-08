@@ -13,28 +13,31 @@ const __dirname = path.resolve();
 
 app.use(cors());
 
-const members = [
-  {
-    name: 'Jake',
-    id: '1',
-  },
-  {
-    name: 'John',
-    id: '2',
-  },
-];
+const logger = (req, res, next) => {
+  console.log(
+    `Launch - ${req.protocol}://${req.get('host')}${req.originalUrl}`
+  );
+  next();
+};
 
 // json and url encoded are used for POST and PUT requests because data needs to be sent as data object
 // json is built in method to recognize incoming data object as JSON
 app.use(express.json());
 // urlencoded is to recognize object as strings or arrays
-app.use(express.urlencoded({ extended: true, useNewURrlParser: true }));
+app.use(express.urlencoded({ extended: false }));
 
+app.use(logger);
 // simple api
-
 app.get('/api/members', (req, res) => {
-  res.json(members);
+  console.log('Scrape is initiated');
+  launchJH();
+  launchHN();
 });
+
+// app.get('/api/members/:id', (req, res) => {
+//   // res.send(req.params.id);
+//   res.json(members.filter((member) => member.id === parseInt(req.params.id)));
+// });
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
@@ -46,14 +49,6 @@ if (process.env.NODE_ENV === 'production') {
 
 // app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/json', express.static(path.join(__dirname, '../public', 'json')));
-
-// app.get('/scrape', function (req, res) {
-//   launchJH();
-//   // launchHN();
-//   // launchBBC();
-//   // launchDR();
-//   res.send('Scrape Successful');
-// });
 
 app.listen(PORT, () => {
   console.log(`Application now listening at http://localhost:${PORT}`);

@@ -30,10 +30,14 @@ export async function downRiver() {
     });
     await browser.close();
     // console.log(dRScrape);
-    fs.writeFile('json/dRstaff.json', JSON.stringify(dRScrape), function (err) {
-      if (err) throw err;
-      console.log('Saved New File Successfully - DR Staff');
-    });
+    fs.writeFile(
+      'client/src/json/dRstaff.json',
+      JSON.stringify(dRScrape),
+      function (err) {
+        if (err) throw err;
+        console.log('Saved New File Successfully - DR Staff');
+      }
+    );
     console.log(success('Browser Closed'));
   } catch (err) {
     console.log(error(err));
@@ -71,12 +75,14 @@ export async function downRiverDouble() {
     });
     await browser.close();
     // console.log(dRDoubleScrape);
-    fs.writeFile('json/dRboats.json', JSON.stringify(dRDoubleScrape), function (
-      err
-    ) {
-      if (err) throw err;
-      console.log('Saved New File Successfully - DR Boats');
-    });
+    fs.writeFile(
+      'client/src/json/dRboats.json',
+      JSON.stringify(dRDoubleScrape),
+      function (err) {
+        if (err) throw err;
+        console.log('Saved New File Successfully - DR Boats');
+      }
+    );
     console.log(success('Browser Closed'));
   } catch (err) {
     console.log(error(err));

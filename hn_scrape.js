@@ -30,10 +30,14 @@ export async function HN() {
     });
     await browser.close();
     // console.log(news);
-    fs.writeFile('json/hackernews.json', JSON.stringify(news), function (err) {
-      if (err) throw err;
-      console.log('Saved New File Successfully - HackerNews');
-    });
+    fs.writeFile(
+      'client/src/json/hackernews.json',
+      JSON.stringify(news),
+      function (err) {
+        if (err) throw err;
+        console.log('Saved New File Successfully - HackerNews');
+      }
+    );
     console.log(success('browser closed'));
   } catch (err) {
     console.log(error(err));
