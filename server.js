@@ -6,12 +6,15 @@ import { launchJH } from './jhu_scrape.js';
 import { launchBBC } from './bbc_scrape.js';
 import { launchDR } from './dr_scrape.js';
 import cors from 'cors';
+import { scrape } from './routes/index.js';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 const __dirname = path.resolve();
 
 app.use(cors());
+
+app.use(scrape);
 
 // json and url encoded are used for POST and PUT requests because data needs to be sent as data object
 // json is built in method to recognize incoming data object as JSON
@@ -30,15 +33,15 @@ if (process.env.NODE_ENV === 'production') {
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/json', express.static(path.join(__dirname, 'json')));
 
-app.get('/scrape', function (req, res) {
-  launchJH();
-  // launchHN();
-  // launchBBC();
-  // launchDR();
-  res.send('Scrape Successful');
-});
+// app.get('/scrape', function (req, res) {
+//   scrape();
+//   // launchHN();
+//   // launchBBC();
+//   // launchDR();
+//   res.send('Scrape Successful');
+// });
 
-app.get('/hello', function (req, res) {
+app.get('/', function (req, res) {
   res.send('Hello World');
 });
 
