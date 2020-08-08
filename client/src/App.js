@@ -37,14 +37,6 @@ class App extends Component {
   }
 
   callAPI3() {
-    // await axios({
-    //   method: 'GET',
-    //   url: `http://localhost:8080/api/members`,
-    // })
-    //   .then((res) => {
-    //     console.log(res.msg);
-    //   })
-    //   .catch((err) => console.log(err));
     axios.get('/api/members').then((res) => console.log(res));
   }
 
