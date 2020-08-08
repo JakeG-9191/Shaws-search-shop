@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 import jhuCovid from '../src/json/jhucovid.json';
 import hackernews from '../src/json/hackernews.json';
 
@@ -36,7 +37,12 @@ class App extends Component {
   }
 
   callAPI3() {
-    fetch('http://localhost:8080/api/members');
+    // fetch('http://localhost:8080/api/members');
+    axios({ method: 'GET', url: 'http://localhost:8080/api/members' }).then(
+      (res) => {
+        console.log(res);
+      }
+    );
   }
 
   componentDidMount() {
@@ -55,17 +61,16 @@ class App extends Component {
           <button onClick={this.callAPI3}>Begin Scrape</button>
           <div className='App-intro'>
             {this.state.info.map((info) => (
-              <ul>
-                <li>{info}</li>
-              </ul>
+              <p>{info}</p>
             ))}
           </div>
           <hr />
           <div className='App-intro'>
             {this.state.info2.map((info) => (
-              <ul>
-                <li>{info}</li>
-              </ul>
+              <div>
+                <p>{info}</p>
+                <hr />
+              </div>
             ))}
           </div>
         </div>

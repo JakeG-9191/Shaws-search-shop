@@ -9,7 +9,7 @@ const success = chalk.keyword('green');
 
 export async function downRiver() {
   console.log(success('Down River Scrape Starting'));
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: true });
   try {
     const page = await browser.newPage();
     await page.goto(`https://www.downriverequip.com/staff.cfm`);
