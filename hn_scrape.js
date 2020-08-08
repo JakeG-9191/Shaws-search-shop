@@ -6,9 +6,10 @@ import fs from 'fs';
 
 const error = chalk.bold.red;
 const success = chalk.keyword('green');
+const alert = chalk.keyword('yellow');
 
 export async function HN() {
-  console.log(success('HackerNews Scrape Starting'));
+  console.log(alert('HackerNews Scrape Starting'));
   const browser = await puppeteer.launch({ headless: true });
   try {
     const page = await browser.newPage();

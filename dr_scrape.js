@@ -6,9 +6,10 @@ import fs from 'fs';
 
 const error = chalk.bold.red;
 const success = chalk.keyword('green');
+const alert = chalk.keyword('yellow');
 
 export async function downRiver() {
-  console.log(success('Down River Scrape Starting'));
+  console.log(alert('Down River Scrape Starting'));
   const browser = await puppeteer.launch({ headless: true });
   try {
     const page = await browser.newPage();
@@ -47,7 +48,7 @@ export async function downRiver() {
 }
 
 export async function downRiverDouble() {
-  console.log(success('Down River Double Scrape Starting'));
+  console.log(alert('Down River Double Scrape Starting'));
   const browser = await puppeteer.launch({ headless: false });
   try {
     const page = await browser.newPage();
