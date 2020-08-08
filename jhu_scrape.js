@@ -32,12 +32,14 @@ export async function JHU() {
     });
     await browser.close();
     // console.log(newFigures);
-    fs.writeFile('json/jhucovid.json', JSON.stringify(newFigures), function (
-      err
-    ) {
-      if (err) throw err;
-      console.log('Saved New File Successfully - JHU');
-    });
+    fs.writeFile(
+      'client/src/json/jhucovid.json',
+      JSON.stringify(newFigures),
+      function (err) {
+        if (err) throw err;
+        console.log('Saved New File Successfully - JHU');
+      }
+    );
     console.log(success('Browser Closed'));
   } catch (err) {
     console.log(error(err));

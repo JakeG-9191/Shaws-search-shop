@@ -35,10 +35,14 @@ export async function BBC() {
     });
     await browser.close();
     // console.log(updatedBBC);
-    fs.writeFile('json/bbc.json', JSON.stringify(updatedBBC), function (err) {
-      if (err) throw err;
-      console.log('Saved New File Successfully - BBC');
-    });
+    fs.writeFile(
+      'client/src/json/bbc.json',
+      JSON.stringify(updatedBBC),
+      function (err) {
+        if (err) throw err;
+        console.log('Saved New File Successfully - BBC');
+      }
+    );
     console.log(success('Browser Closed'));
   } catch (err) {
     console.log(error(err));
