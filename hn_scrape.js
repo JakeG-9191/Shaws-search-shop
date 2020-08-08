@@ -9,8 +9,8 @@ const success = chalk.keyword('green');
 
 export async function HN() {
   console.log(success('HackerNews Scrape Starting'));
+  const browser = await puppeteer.launch({ headless: false });
   try {
-    const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     await page.goto(`https://news.ycombinator.com/`);
     await page.waitForSelector(`a.storylink`);

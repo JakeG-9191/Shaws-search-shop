@@ -9,8 +9,8 @@ const success = chalk.keyword('green');
 
 export async function BBC() {
   console.log(success('BBC Scrape Starting'));
+  const browser = await puppeteer.launch({ headless: false });
   try {
-    const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     await page.goto(`https://www.bbc.com/news`);
     await page.waitForSelector(`ol.gel-layout__item`);

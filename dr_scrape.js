@@ -9,8 +9,8 @@ const success = chalk.keyword('green');
 
 export async function downRiver() {
   console.log(success('Down River Scrape Starting'));
+  const browser = await puppeteer.launch({ headless: false });
   try {
-    const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     await page.goto(`https://www.downriverequip.com/staff.cfm`);
     await page.waitForSelector(`div.blog-news`);
@@ -44,8 +44,8 @@ export async function downRiver() {
 
 export async function downRiverDouble() {
   console.log(success('Down River Double Scrape Starting'));
+  const browser = await puppeteer.launch({ headless: false });
   try {
-    const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     await page.goto(`https://www.downriverequip.com/boats-cid-2`);
     await page.waitForSelector(`div.item-box`);

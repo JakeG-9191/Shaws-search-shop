@@ -1,6 +1,1 @@
-[
-  { "title": "Global Confirmed", "nums": "19,266,406" },
-  { "title": "Global Deaths", "nums": "718,530" },
-  { "title": "U.S. Confirmed", "nums": "4,928,802" },
-  { "title": "U.S. Deaths", "nums": "161,052" }
-]
+[{"title":"Global Confirmed","nums":"19,406,765"},{"title":"Global Deaths","nums":"721,925"},{"title":"U.S. Confirmed","nums":"4,942,747"},{"title":"U.S. Deaths","nums":"161,367"}]

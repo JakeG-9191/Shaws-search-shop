@@ -48,12 +48,11 @@ class App extends Component {
             <img src={logo} className='App-logo' alt='logo' />
             <h1 className='App-title'>Welcome to the Thunder Dome</h1>
           </header>
-          <p className='App-intro'>{this.state.length}</p>
-          <p className='App-intro'>
+          <div className='App-intro'>
             {this.state.info.map((info) => (
               <p>{info}</p>
             ))}
-          </p>
+          </div>
           <hr />
           <div className='App-intro'>
             {this.state.info2.map((info) => (

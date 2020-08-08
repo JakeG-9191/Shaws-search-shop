@@ -9,8 +9,8 @@ const success = chalk.keyword('green');
 
 export async function JHU() {
   console.log(success('JHU Scrape Starting'));
+  const browser = await puppeteer.launch({ headless: false });
   try {
-    const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     await page.goto(`https://coronavirus.jhu.edu/`);
     await page.waitForSelector(`article.FeaturedStats_base__G1hZh`);
