@@ -1,77 +1,62 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import jhuCovid from '../src/json/jhucovid.json';
 import hackernews from '../src/json/hackernews.json';
 
-class App extends Component {
-  state = {
-    info: [],
-    info2: [],
-  };
+function App() {
+  const [info, setInfo] = useState([]);
+  const [num, setNum] = useState(0);
 
-  callAPI() {
+  const callAPI = () => {
     let myArray = [];
     for (let i = 0; i < jhuCovid.length; i++) {
       let newTitle = jhuCovid[i].title;
-      let nemNum = jhuCovid[i].nums;
-      myArray.push(newTitle, nemNum);
+      let newNum = jhuCovid[i].nums;
+      myArray.push(newTitle, newNum);
     }
-    this.setState({
-      info: myArray,
-    });
-  }
+    setInfo([...info, myArray]);
+  };
 
-  callAPI2() {
-    let myArray = [];
-    for (let i = 0; i < hackernews.length; i++) {
-      let newTitle = hackernews[i].title;
-      let nemLink = hackernews[i].link;
-      let newScore = hackernews[i].score;
-      myArray.push(newTitle, nemLink, newScore);
-    }
-    this.setState({
-      info2: myArray,
-    });
-  }
-
-  callAPI3() {
+  const grabUpdatedInfo = () => {
     axios.get('/api/members').then((res) => console.log(res));
-  }
+  };
 
-  componentDidMount() {
-    this.callAPI();
-    this.callAPI2();
-  }
+  useEffect(() => {
+    callAPI();
+  }, []);
 
-  render() {
-    return (
-      <>
-        <div className='App'>
-          <header className='App-header'>
-            <img src={logo} className='App-logo' alt='logo' />
-            <h1 className='App-title'>Welcome to the Thunder Dome</h1>
-          </header>
-          <button onClick={this.callAPI3}>Begin Scrape</button>
-          <div className='App-intro'>
-            {this.state.info.map((info) => (
-              <p>{info}</p>
-            ))}
-          </div>
-          <hr />
-          <div className='App-intro'>
+  return (
+    <>
+      <div className='App'>
+        <header className='App-header'>
+          <img src={logo} className='App-logo' alt='logo' />
+          <h1 className='App-title'>Welcome to the Thunder Dome</h1>
+        </header>
+        <button onClick={grabUpdatedInfo}>Begin Scrape</button>
+        <div className='App-intro'>
+          <button onClick={() => setNum(num + 2)}>Next Stats</button>
+          <button onClick={() => setNum(0)}>Reset Stats</button>
+          {info.map((info) => (
+            <div>
+              <h4>{info[num]}</h4>
+              <p>{info[num + 1]}</p>
+            </div>
+          ))}
+        </div>
+        <hr />
+        {/* <div className='App-intro'>
             {this.state.info2.map((info) => (
               <div>
                 <p>{info}</p>
                 <hr />
               </div>
             ))}
-          </div>
-        </div>
-      </>
-    );
-  }
+          </div> */}
+      </div>
+    </>
+  );
 }
 
 export default App;
