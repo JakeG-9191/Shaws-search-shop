@@ -30,18 +30,14 @@ app.use(logger);
 // simple api
 app.get('/api/members', (req, res) => {
   console.log('Scrape is initiated');
-  launchJH();
-  launchHN();
+  // launchJH();
+  // launchHN();
+  launchDR();
   res.send({
     msg: 'Scrape has finished',
     location: `${req.protocol}://${req.get('host')}${req.originalUrl}`,
   });
 });
-
-// app.get('/api/members/:id', (req, res) => {
-//   // res.send(req.params.id);
-//   res.json(members.filter((member) => member.id === parseInt(req.params.id)));
-// });
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
@@ -50,9 +46,6 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, '../public', 'index.html'));
   });
 }
-
-// app.use(express.static(path.join(__dirname, 'public')));
-// app.use('/json', express.static(path.join(__dirname, '../public', 'json')));
 
 app.listen(PORT, () => {
   console.log(`Application now listening at http://localhost:${PORT}`);

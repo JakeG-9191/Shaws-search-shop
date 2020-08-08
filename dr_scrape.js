@@ -49,7 +49,7 @@ export async function downRiver() {
 
 export async function downRiverDouble() {
   console.log(alert('Down River Double Scrape Starting'));
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: true });
   try {
     const page = await browser.newPage();
     await page.goto(`https://www.downriverequip.com/boats-cid-2`);
@@ -64,12 +64,14 @@ export async function downRiverDouble() {
         `div.shop-item-info > a > h6.shop-item-brand`
       );
       let itemPrice = document.querySelectorAll(`div.shop-item-price`);
+      let itemImage = document.querySelectorAll(`div.shop-item > div.item-img`);
       let figureArray = [];
       for (let i = 0; i < itemOverallInfo.length; i++) {
         figureArray[i] = {
           name: itemName[i].innerText.trim(),
           brand: itemBrand[i].innerText.trim(),
           price: itemPrice[i].innerText.trim(),
+          image: itemImage[i].getAttribute(`src`),
         };
       }
       return figureArray;
