@@ -2,7 +2,7 @@
   "name": "shaws-search-shop",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "app.js",
   "dependencies": {
     "axios": "^0.19.2",
     "chalk": "^4.1.0",
@@ -13,12 +13,14 @@
     "path": "^0.12.7",
     "puppeteer": "^5.2.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "dev": "node server.js && cd client npm start"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
