@@ -20,8 +20,13 @@ export async function BBC() {
       let allnewFigures = document.querySelectorAll(
         `div.nw-c-most-read__items > ol > li.gel-layout__item`
       );
-      let updatedTitle = document.querySelectorAll(`span.nw-c-most-read__rank`);
       let updatedNumbers = document.querySelectorAll(
+        `span.nw-c-most-read__rank`
+      );
+      let updatedLink = document.querySelectorAll(
+        `div.gs-o-media__body > a.gs-c-promo-heading`
+      );
+      let updatedTitle = document.querySelectorAll(
         `a.gs-o-faux-block-link__overlay-link > span.gs-c-promo-heading__title`
       );
       let figureArray = [];
@@ -29,7 +34,7 @@ export async function BBC() {
         figureArray[i] = {
           title: updatedTitle[i].innerText.trim(),
           nums: updatedNumbers[i].innerText.trim(),
-          // link: updatedTitle[i].getAttribute(`href`),
+          link: updatedLink[i].getAttribute(`href`),
         };
       }
       return figureArray;
