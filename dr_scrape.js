@@ -12,7 +12,7 @@ const error = chalk.bold.red;
 const success = chalk.keyword('green');
 const alert = chalk.keyword('yellow');
 
-export async function downRiver() {
+async function downRiver() {
   console.log(alert('Down River Scrape Starting'));
   const browser = await puppeteer.launch({ headless: true });
   try {
