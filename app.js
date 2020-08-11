@@ -30,8 +30,8 @@ app.use(logger);
 // simple api
 app.get('/api/members', (req, res) => {
   console.log('Scrape is initiated');
-  // launchJH();
-  // launchHN();
+  launchJH();
+  launchHN();
   launchDR();
   res.send({
     msg: 'Scrape has finished',

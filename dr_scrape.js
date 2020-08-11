@@ -64,7 +64,9 @@ export async function downRiverDouble() {
         `div.shop-item-info > a > h6.shop-item-brand`
       );
       let itemPrice = document.querySelectorAll(`div.shop-item-price`);
-      let itemImage = document.querySelectorAll(`div.shop-item > div.item-img`);
+      let itemImage = document.querySelectorAll(
+        `div.shop-item > div.item-img > img`
+      );
       let figureArray = [];
       for (let i = 0; i < itemOverallInfo.length; i++) {
         figureArray[i] = {

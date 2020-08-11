@@ -8,8 +8,10 @@ import hackernews from '../src/json/hackernews.json';
 function App() {
   const [info, setInfo] = useState([]);
   const [hnInfo, sethnInfo] = useState([]);
+  const [drInfo, setDrInfo] = useState([]);
   const [jhCount, setjhCount] = useState(0);
   const [hnCount, sethnCount] = useState(0);
+  const [drCount, setDrCount] = useState(0);
 
   const callJHInfo = () => {
     let myArray = [];
@@ -50,7 +52,11 @@ function App() {
           <button onClick={grabUpdatedInfo}>Begin Scrape</button>
         </header>
         <div className='App-intro'>
-          <button onClick={() => setjhCount(jhCount + 2)}>Next Stats</button>
+          {jhCount < 6 ? (
+            <button onClick={() => setjhCount(jhCount + 2)}>Next Stat</button>
+          ) : (
+            ''
+          )}
           <button onClick={() => setjhCount(0)}>Reset Stats</button>
           <div>{3 - jhCount / 2} Statistics Remaining</div>
           {info.map((info) => (
