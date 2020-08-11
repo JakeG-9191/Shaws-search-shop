@@ -10,7 +10,9 @@
 const express = require('express');
 const path = require('path');
 const launchHN = require('./hn_scrape');
-
+const launchJH = require('./jhu_scrape');
+const launchBBC = require('./bbc_scrape');
+const launchDR = require('./dr_scrape');
 const cors = require('cors');
 
 const app = express();
@@ -36,10 +38,10 @@ app.use(logger);
 // simple api
 app.get('/api/members', (req, res) => {
   console.log('Scrape is initiated');
-  // launchJH();
+  launchJH();
   launchHN();
-  // launchDR();
-  // launchBBC();
+  launchDR();
+  launchBBC();
   res.send({
     msg: 'Scrape has finished',
     location: `${req.protocol}://${req.get('host')}${req.originalUrl}`,
