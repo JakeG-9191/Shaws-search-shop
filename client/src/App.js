@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
 import axios from 'axios';
 import jhuCovid from '../src/json/jhucovid.json';
 import hackernews from '../src/json/hackernews.json';
 import drscrape from '../src/json/dRboats.json';
 import bbcscrape from '../src/json/bbc.json';
+import './App.css';
 
 function App() {
   const [info, setInfo] = useState([]);
@@ -79,7 +78,9 @@ function App() {
 
         <div className='App-intro'>
           {jhCount < jhuCovid.length * 2 - 2 ? (
-            <button onClick={() => setjhCount(jhCount + 2)}>Next Stat</button>
+            <button variant='primary' onClick={() => setjhCount(jhCount + 2)}>
+              Next Stat
+            </button>
           ) : (
             ''
           )}
@@ -91,7 +92,7 @@ function App() {
           <button onClick={() => setjhCount(0)}>Reset Stats</button>
           <div>{jhuCovid.length - 1 - jhCount / 2} Statistics Remaining</div>
           {info.map((info) => (
-            <div>
+            <div key={info.length}>
               <h4>{info[jhCount]}</h4>
               <p>{info[jhCount + 1]}</p>
             </div>
@@ -118,7 +119,7 @@ function App() {
           <button onClick={() => sethnCount(0)}>Reset Articles</button>
           <div>{hackernews.length - 1 - hnCount / 3} Articles Remaining</div>
           {hnInfo.map((info) => (
-            <div>
+            <div key={info.length}>
               <h4>{info[hnCount]}</h4>
               <a
                 target='_blank'
@@ -152,7 +153,7 @@ function App() {
           <button onClick={() => setBBCCount(0)}>Reset Articles</button>
           <div>{bbcscrape.length - 1 - bbcCount / 2} Articles Remaining</div>
           {bbcInfo.map((info) => (
-            <div>
+            <div key={info.length}>
               <h2>{info[bbcCount]}</h2>
               <a
                 target='_blank'
@@ -181,11 +182,11 @@ function App() {
           <button onClick={() => setDrCount(0)}>Reset Item Search</button>
           <div>{drscrape.length - 1 - drCount / 4} Items Remaining</div>
           {drInfo.map((info) => (
-            <div>
+            <div key={info.length}>
               <h2>{info[drCount]}</h2>
               <h4>{info[drCount + 1]}</h4>
               <p>{info[drCount + 2]}</p>
-              <img src={info[drCount + 3]}></img>
+              <img src={info[drCount + 3]} alt={info[drCount]}></img>
             </div>
           ))}
         </div>
