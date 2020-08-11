@@ -67,7 +67,7 @@ function App() {
         </header>
 
         <div className='App-intro'>
-          {jhCount < 6 ? (
+          {jhCount < jhuCovid.length * 2 - 2 ? (
             <button onClick={() => setjhCount(jhCount + 2)}>Next Stat</button>
           ) : (
             ''
@@ -86,9 +86,17 @@ function App() {
             </div>
           ))}
         </div>
+
         <hr />
+
         <div className='App-intro'>
-          <button onClick={() => sethnCount(hnCount + 3)}>Next Article</button>
+          {hnCount < hackernews.length * 3 - 3 ? (
+            <button onClick={() => sethnCount(hnCount + 3)}>
+              Next Article
+            </button>
+          ) : (
+            ''
+          )}
           {hnCount > 0 ? (
             <button onClick={() => sethnCount(hnCount - 3)}>
               Last Article
@@ -112,10 +120,20 @@ function App() {
             </div>
           ))}
         </div>
+
         <hr />
+
         <div className='App-intro'>
-          <button onClick={() => setDrCount(drCount + 4)}>Next Item</button>
-          <button onClick={() => setDrCount(drCount - 4)}>Last Item</button>
+          {drCount < drscrape.length * 4 - 4 ? (
+            <button onClick={() => setDrCount(drCount + 4)}>Next Item</button>
+          ) : (
+            ''
+          )}
+          {drCount > 0 ? (
+            <button onClick={() => setDrCount(drCount - 4)}>Last Item</button>
+          ) : (
+            ''
+          )}
           <button onClick={() => setDrCount(0)}>Reset Item Search</button>
           <div>{drscrape.length - 1 - drCount / 4} Items Remaining</div>
           {drInfo.map((info) => (

@@ -33,6 +33,7 @@ app.get('/api/members', (req, res) => {
   launchJH();
   launchHN();
   launchDR();
+  launchBBC();
   res.send({
     msg: 'Scrape has finished',
     location: `${req.protocol}://${req.get('host')}${req.originalUrl}`,
