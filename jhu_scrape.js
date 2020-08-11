@@ -1,14 +1,18 @@
-import cheerio from 'cheerio';
-import puppeteer from 'puppeteer';
-import chalk from 'chalk';
+// import cheerio from 'cheerio';
+// import puppeteer from 'puppeteer';
+// import chalk from 'chalk';
 
-import fs from 'fs';
+// import fs from 'fs';
+
+const puppeteer = require('puppeteer');
+const chalk = require('chalk');
+const fs = require('fs');
 
 const error = chalk.bold.red;
 const success = chalk.keyword('green');
 const alert = chalk.keyword('yellow');
 
-export async function JHU() {
+async function JHU() {
   console.log(alert('JHU Scrape Starting'));
   const browser = await puppeteer.launch({ headless: true });
   try {
@@ -49,10 +53,12 @@ export async function JHU() {
   }
 }
 
-export function launchJH() {
+function launchJH() {
   let date = Date();
   let format = date.toString();
   console.log(`Date and time is: ${format}`);
   JHU();
   return console.log(`launched JHU Scrape`);
 }
+
+module.exports = launchJH;

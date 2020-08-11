@@ -1,15 +1,21 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import path from 'path';
-import { launchHN } from './hn_scrape.js';
-import { launchJH } from './jhu_scrape.js';
-import { launchBBC } from './bbc_scrape.js';
-import { launchDR } from './dr_scrape.js';
-import cors from 'cors';
+// import express from 'express';
+// import mongoose from 'mongoose';
+// import path from 'path';
+// import { launchHN } from './hn_scrape.js';
+// import { launchJH } from './jhu_scrape.js';
+// import { launchBBC } from './bbc_scrape.js';
+// import { launchDR } from './dr_scrape.js';
+// import cors from 'cors';
+
+const express = require('express');
+const path = require('path');
+const launchHN = require('./hn_scrape');
+
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-const __dirname = path.resolve();
+// const __dirname = path.resolve();
 
 app.use(cors());
 
@@ -30,10 +36,10 @@ app.use(logger);
 // simple api
 app.get('/api/members', (req, res) => {
   console.log('Scrape is initiated');
-  launchJH();
+  // launchJH();
   launchHN();
-  launchDR();
-  launchBBC();
+  // launchDR();
+  // launchBBC();
   res.send({
     msg: 'Scrape has finished',
     location: `${req.protocol}://${req.get('host')}${req.originalUrl}`,

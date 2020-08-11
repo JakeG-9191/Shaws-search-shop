@@ -1,8 +1,12 @@
-import cheerio from 'cheerio';
-import puppeteer from 'puppeteer';
-import chalk from 'chalk';
+// import cheerio from 'cheerio';
+// import puppeteer from 'puppeteer';
+// import chalk from 'chalk';
 
-import fs from 'fs';
+// import fs from 'fs';
+
+const puppeteer = require('puppeteer');
+const chalk = require('chalk');
+const fs = require('fs');
 
 const error = chalk.bold.red;
 const success = chalk.keyword('green');
@@ -47,7 +51,7 @@ export async function downRiver() {
   }
 }
 
-export async function downRiverDouble() {
+async function downRiverDouble() {
   console.log(alert('Down River Double Scrape Starting'));
   const browser = await puppeteer.launch({ headless: true });
   try {
@@ -96,8 +100,10 @@ export async function downRiverDouble() {
   }
 }
 
-export function launchDR() {
+function launchDR() {
   downRiver();
   downRiverDouble();
   return console.log(`launched Down River Scrape & DR Double Scrape`);
 }
+
+module.exports = launchDR;

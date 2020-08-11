@@ -1,14 +1,18 @@
-import cheerio from 'cheerio';
-import puppeteer from 'puppeteer';
-import chalk from 'chalk';
+// import cheerio from 'cheerio';
+// import puppeteer from 'puppeteer';
+// import chalk from 'chalk';
 
-import fs from 'fs';
+// import fs from 'fs';
+
+const puppeteer = require('puppeteer');
+const chalk = require('chalk');
+const fs = require('fs');
 
 const error = chalk.bold.red;
 const success = chalk.keyword('green');
 const alert = chalk.keyword('yellow');
 
-export async function HN() {
+async function HN() {
   console.log(alert('HackerNews Scrape Starting'));
   const browser = await puppeteer.launch({ headless: true });
   try {
@@ -47,7 +51,9 @@ export async function HN() {
   }
 }
 
-export function launchHN() {
+function launchHN() {
   HN();
   return console.log(`launched HN Scrape`);
 }
+
+module.exports = launchHN;
