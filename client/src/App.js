@@ -4,6 +4,7 @@ import './App.css';
 import axios from 'axios';
 import jhuCovid from '../src/json/jhucovid.json';
 import hackernews from '../src/json/hackernews.json';
+import drscrape from '../src/json/dRboats.json';
 
 function App() {
   const [info, setInfo] = useState([]);
@@ -34,6 +35,18 @@ function App() {
     sethnInfo([...hnInfo, myArray]);
   };
 
+  const callDrInfo = () => {
+    let myArray = [];
+    for (let i = 0; i < drscrape.length; i++) {
+      let newItem = drscrape[i].name;
+      let newBrand = drscrape[i].brand;
+      let newPrice = drscrape[i].price;
+      let newImage = drscrape[i].image;
+      myArray.push(newItem, newBrand, newPrice, newImage);
+    }
+    setDrInfo([...drInfo, myArray]);
+  };
+
   const grabUpdatedInfo = () => {
     axios.get('/api/members').then((res) => console.log(res));
   };
@@ -41,6 +54,7 @@ function App() {
   useEffect(() => {
     callJHInfo();
     callHNInfo();
+    callDrInfo();
   }, []);
 
   return (
@@ -51,14 +65,20 @@ function App() {
           <h1 className='App-title'>Welcome to the Thunder Dome</h1>
           <button onClick={grabUpdatedInfo}>Begin Scrape</button>
         </header>
+
         <div className='App-intro'>
           {jhCount < 6 ? (
             <button onClick={() => setjhCount(jhCount + 2)}>Next Stat</button>
           ) : (
             ''
           )}
+          {jhCount > 0 ? (
+            <button onClick={() => setjhCount(jhCount - 2)}>Last Stat</button>
+          ) : (
+            ''
+          )}
           <button onClick={() => setjhCount(0)}>Reset Stats</button>
-          <div>{3 - jhCount / 2} Statistics Remaining</div>
+          <div>{jhuCovid.length - 1 - jhCount / 2} Statistics Remaining</div>
           {info.map((info) => (
             <div>
               <h4>{info[jhCount]}</h4>
@@ -69,7 +89,15 @@ function App() {
         <hr />
         <div className='App-intro'>
           <button onClick={() => sethnCount(hnCount + 3)}>Next Article</button>
+          {hnCount > 0 ? (
+            <button onClick={() => sethnCount(hnCount - 3)}>
+              Last Article
+            </button>
+          ) : (
+            ''
+          )}
           <button onClick={() => sethnCount(0)}>Reset Articles</button>
+          <div>{hackernews.length - 1 - hnCount / 3} Articles Remaining</div>
           {hnInfo.map((info) => (
             <div>
               <h4>{info[hnCount]}</h4>
@@ -81,6 +109,21 @@ function App() {
                 {info[hnCount + 1]}
               </a>
               <p>{info[hnCount + 2]}</p>
+            </div>
+          ))}
+        </div>
+        <hr />
+        <div className='App-intro'>
+          <button onClick={() => setDrCount(drCount + 4)}>Next Item</button>
+          <button onClick={() => setDrCount(drCount - 4)}>Last Item</button>
+          <button onClick={() => setDrCount(0)}>Reset Item Search</button>
+          <div>{drscrape.length - 1 - drCount / 4} Items Remaining</div>
+          {drInfo.map((info) => (
+            <div>
+              <h2>{info[drCount]}</h2>
+              <h4>{info[drCount + 1]}</h4>
+              <p>{info[drCount + 2]}</p>
+              <img src={info[drCount + 3]}></img>
             </div>
           ))}
         </div>
