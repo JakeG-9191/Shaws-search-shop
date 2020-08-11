@@ -18,7 +18,7 @@ export async function BBC() {
 
     const updatedBBC = await page.evaluate(() => {
       let allnewFigures = document.querySelectorAll(
-        `div.nw-c-most-read__items > ol > li.gel-layout__item`
+        `div.nw-c-most-read > div.gel-wrap > div.nw-c-most-read__items > ol > li`
       );
       let updatedNumbers = document.querySelectorAll(
         `span.nw-c-most-read__rank`

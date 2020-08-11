@@ -5,14 +5,17 @@ import axios from 'axios';
 import jhuCovid from '../src/json/jhucovid.json';
 import hackernews from '../src/json/hackernews.json';
 import drscrape from '../src/json/dRboats.json';
+import bbcscrape from '../src/json/bbc.json';
 
 function App() {
   const [info, setInfo] = useState([]);
   const [hnInfo, sethnInfo] = useState([]);
   const [drInfo, setDrInfo] = useState([]);
+  const [bbcInfo, setBBCInfo] = useState([]);
   const [jhCount, setjhCount] = useState(0);
   const [hnCount, sethnCount] = useState(0);
   const [drCount, setDrCount] = useState(0);
+  const [bbcCount, setBBCCount] = useState(0);
 
   const callJHInfo = () => {
     let myArray = [];
@@ -47,6 +50,16 @@ function App() {
     setDrInfo([...drInfo, myArray]);
   };
 
+  const callBBCInfo = () => {
+    let myArray = [];
+    for (let i = 0; i < bbcscrape.length; i++) {
+      let newTitle = bbcscrape[i].title;
+      let newLink = bbcscrape[i].link;
+      myArray.push(newTitle, newLink);
+    }
+    setBBCInfo([...bbcInfo, myArray]);
+  };
+
   const grabUpdatedInfo = () => {
     axios.get('/api/members').then((res) => console.log(res));
   };
@@ -55,16 +68,14 @@ function App() {
     callJHInfo();
     callHNInfo();
     callDrInfo();
+    callBBCInfo();
   }, []);
 
   return (
     <>
       <div className='App'>
-        <header className='App-header'>
-          <img src={logo} className='App-logo' alt='logo' />
-          <h1 className='App-title'>Welcome to the Thunder Dome</h1>
-          <button onClick={grabUpdatedInfo}>Begin Scrape</button>
-        </header>
+        <h1 className='App-title'>Welcome to the Thunder Dome</h1>
+        <button onClick={grabUpdatedInfo}>Begin Scrape</button>
 
         <div className='App-intro'>
           {jhCount < jhuCovid.length * 2 - 2 ? (
@@ -117,6 +128,39 @@ function App() {
                 {info[hnCount + 1]}
               </a>
               <p>{info[hnCount + 2]}</p>
+            </div>
+          ))}
+        </div>
+
+        <hr />
+
+        <div className='App-intro'>
+          {bbcCount < bbcscrape.length * 2 - 2 ? (
+            <button onClick={() => setBBCCount(bbcCount + 2)}>
+              Next Article
+            </button>
+          ) : (
+            ''
+          )}
+          {bbcCount > 0 ? (
+            <button onClick={() => setBBCCount(bbcCount - 2)}>
+              Last Article
+            </button>
+          ) : (
+            ''
+          )}
+          <button onClick={() => setBBCCount(0)}>Reset Articles</button>
+          <div>{bbcscrape.length - 1 - bbcCount / 2} Articles Remaining</div>
+          {bbcInfo.map((info) => (
+            <div>
+              <h2>{info[bbcCount]}</h2>
+              <a
+                target='_blank'
+                rel='noopener noreferrer'
+                href={`https://www.bbc.com${info[bbcCount + 1]}`}
+              >
+                {info[bbcCount + 1]}
+              </a>
             </div>
           ))}
         </div>
