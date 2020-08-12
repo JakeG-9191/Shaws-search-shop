@@ -27,8 +27,7 @@
     "server": "node app.js",
     "client": "cd client && npm run start",
     "dev": "nodemon app.js",
-    "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "build": "cd client && npm run build"
   },
   "repository": {
     "type": "git",
