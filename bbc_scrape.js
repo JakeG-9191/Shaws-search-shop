@@ -14,7 +14,10 @@ const alert = chalk.keyword('yellow');
 
 async function BBC() {
   console.log(alert('BBC Scrape Starting'));
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
   try {
     const page = await browser.newPage();
     await page.goto(`https://www.bbc.com/news`);

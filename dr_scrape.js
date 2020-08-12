@@ -14,7 +14,10 @@ const alert = chalk.keyword('yellow');
 
 async function downRiver() {
   console.log(alert('Down River Scrape Starting'));
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
   try {
     const page = await browser.newPage();
     await page.goto(`https://www.downriverequip.com/staff.cfm`);
